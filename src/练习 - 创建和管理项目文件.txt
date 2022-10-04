@@ -1,0 +1,58 @@
+# 建立虛擬環境
+运行 venv env 以创建名为 env 的虚拟环境：
+
+Bash-->
+python -m venv env
+
+# 啟動虛擬環境
+Bash-->
+ # Windows
+ source env/Scripts/activate
+
+ # Linux, WSL or macOS
+ source env/bin/activate
+命令提示符应以 (env) 开头，以指示虚拟环境的名称。
+
+# 安装项目的依赖项
+你有权访问一些源代码和 requirements.txt 文件。 .txt 文件包含要下载的库。 你需要下载这些库，以便程序能够按预期运行。
+
+从终端创建所需的文件：
+Bash-->
+mkdir src
+cd src
+touch app.py 
+touch requirements.txt
+这些是你的文件：
+
+# 将以下内容添加到 app.py：
+
+from datetime import *
+from dateutil.relativedelta import *
+now = datetime.now()
+print(now)
+
+now = now + relativedelta(months=1, weeks=1, hour=10)
+
+print(now)
+
+# 将以下内容添加到 requirements.txt：
+
+python-dateutil==2.8.2
+six==1.16.0
+
+# 运行 pip install 以安装 requirements.txt 中指定的库：
+Bash-->
+pip install -r requirements.txt
+
+# 升级包
+假设你创建的项目使用的是旧版本的库 python-dateutil。换句话说，团队希望你升级修补程序版本而不安装主要更新，因为这可能会给你的应用程序带来风险并可能破坏它。
+首先，我们要模拟使用早期版本的 python-dateutil。
+執行 pip install：
+Bash-->
+pip install python-dateutil===2.7.4
+现在，你应使用版本 2.7.4。 接下来，你要尝试升级到最新的修补程序版本。
+
+執行 pip install --upgrade：
+Bash-->
+pip install "python-dateutil==2.7.*" --upgrade
+输出的最后一行应显示“已成功安装 python-dateutil-2.7.5”。这意味着，它会通过查看最右边的数字来升级包。
